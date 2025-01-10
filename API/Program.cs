@@ -13,10 +13,11 @@ builder.Services.AddDbContext<DataContext>(opt =>
 }
 ); // Add your DbContext here
 
+builder.Services.AddCors();
 var app = builder.Build();
 
 app.UseRouting(); 
-
+app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200","https://localhost:4200")); // Add CORS policy here
 app.MapControllers();
 
 app.Run();
